@@ -110,7 +110,7 @@
             position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15;
             animation: floatOrb 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
         }
-        body.light-mode .orb { opacity: 0.08; } /* Lighter orbs for light mode */
+        body.light-mode .orb { opacity: 0.08; }
         
         .orb-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #0ea5e9; }
         .orb-2 { bottom: -10%; right: -10%; width: 40vw; height: 40vw; background: #8b5cf6; animation-delay: -5s; }
@@ -134,22 +134,15 @@
             display: flex; justify-content: space-between; align-items: center;
         }
         .nav-brand {
-            font-size: 1.5rem; font-weight: 700;
+            font-size: 1.4rem; font-weight: 700;
             background: var(--grad-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            white-space: nowrap;
         }
         
-        .nav-actions { display: flex; align-items: center; gap: 20px; }
-        
-        /* Theme Toggle Button */
-        .theme-toggle {
-            background: var(--bg-card); border: 1px solid var(--glass-border);
-            width: 40px; height: 40px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--text-light); font-size: 1.1rem; cursor: pointer;
-            transition: var(--transition); outline: none;
+        .nav-right {
+            display: flex; align-items: center; gap: 25px;
         }
-        .theme-toggle:hover { background: var(--primary-color); color: #fff; transform: rotate(15deg); }
-
+        
         .nav-menu { display: flex; gap: 30px; align-items: center; }
         .nav-menu li a {
             font-size: 1rem; font-weight: 500; color: var(--text-light);
@@ -162,6 +155,16 @@
         .nav-menu li a:hover { color: var(--primary-color); }
         .nav-menu li a:hover::after { width: 100%; }
 
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: var(--bg-card); border: 1px solid var(--glass-border);
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-light); font-size: 1.1rem; cursor: pointer;
+            transition: var(--transition); outline: none; flex-shrink: 0;
+        }
+        .theme-toggle:hover { background: var(--primary-color); color: #fff; transform: rotate(15deg); }
+
         .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
         .hamburger span {
             width: 25px; height: 2px; background: var(--text-light);
@@ -170,6 +173,8 @@
 
         /* Mobile Menu */
         @media (max-width: 768px) {
+            .nav-brand { font-size: 1.15rem; } /* Fits perfectly on mobile */
+            .nav-right { gap: 15px; }
             .hamburger { display: flex; }
             .nav-menu {
                 position: absolute; top: 100%; left: 0; width: 100%;
@@ -220,11 +225,11 @@
             width: 100%; height: 100%; background: var(--bg-main);
             border-radius: 50%; overflow: hidden; padding: 4px;
         }
-        /* Zoom Profile Picture */
+        /* Increased Zoom (scale 1.35) on Profile Picture */
         .profile-img-container img {
             width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
-            transform: scale(1.15); /* Zoomed in to hide cropped edges */
-            object-position: center top;
+            transform: scale(1.35); /* Zoomed more to hide any edges perfectly */
+            object-position: center 10%; /* Keeping face in perfect position */
         }
 
         .hero h1 {
@@ -296,7 +301,7 @@
            Education & Exam Section
            ========================================================================== */
         .edu-exam-wrapper {
-            background: linear-gradient(135deg, #0ea5e9, #2563eb); /* Premium Solid Gradient */
+            background: linear-gradient(135deg, #0ea5e9, #2563eb);
             border-radius: 24px; padding: 60px 40px; text-align: center; 
             position: relative; overflow: hidden; box-shadow: 0 15px 40px rgba(37, 99, 235, 0.3);
             color: #fff;
@@ -325,7 +330,7 @@
         .btn-yt-main:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3); background: #f8fafc; }
 
         /* ==========================================================================
-           Contact Buttons Section (Privacy focused)
+           Contact Buttons Section
            ========================================================================== */
         .contact-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;
@@ -341,7 +346,6 @@
         }
         .contact-btn i { font-size: 1.5rem; transition: var(--transition); }
         
-        /* Individual Button Colors & Hover */
         .contact-btn.ph { background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.3); color: var(--color-ph); }
         .contact-btn.ph:hover { background: var(--color-ph); color: #fff; transform: translateY(-5px); box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4); }
 
@@ -415,7 +419,7 @@
             .about-content p { font-size: 1.05rem; }
             .edu-exam-wrapper { padding: 40px 25px; }
             .edu-exam-wrapper h3 { font-size: 1.8rem; }
-            .contact-grid { grid-template-columns: 1fr; } /* Stack on mobile */
+            .contact-grid { grid-template-columns: 1fr; }
             .contact-btn { padding: 16px; font-size: 1.1rem; }
         }
     </style>
@@ -437,10 +441,19 @@
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#home" class="nav-brand">M. Hossain</a>
+            <!-- Updated Brand Name -->
+            <a href="#home" class="nav-brand">Md. Mokbul Hossain</a>
             
-            <div class="nav-actions">
-                <!-- Dark/Light Theme Toggle -->
+            <div class="nav-right">
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#profile">Profile</a></li>
+                    <li><a href="#education">Education & Exam</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                
+                <!-- Dark/Light Theme Toggle (Now properly on the right corner) -->
                 <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">
                     <i class="fas fa-moon" id="themeIcon"></i>
                 </button>
@@ -449,14 +462,6 @@
                     <span></span><span></span><span></span>
                 </div>
             </div>
-
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#profile">Profile</a></li>
-                <li><a href="#education">Education & Exam</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
         </div>
     </nav>
 
@@ -557,7 +562,7 @@
             </div>
             <div class="contact-grid reveal">
                 
-                <!-- Privacy-focused Clean Buttons (No explicit numbers/URLs shown) -->
+                <!-- Privacy-focused Clean Buttons -->
                 <a href="tel:+8801730984088" class="contact-btn ph safe-link">
                     <i class="fas fa-phone-alt"></i> Call Now
                 </a>
@@ -578,7 +583,6 @@
                     <i class="fas fa-envelope"></i> Email
                 </a>
 
-                <!-- Copy Contact Number (Hidden text, secure copy) -->
                 <button class="contact-btn copy-btn" onclick="copyContactNumber()">
                     <i class="fas fa-copy" id="copyBtnIcon"></i> Copy Phone Number
                 </button>
@@ -716,7 +720,7 @@
             toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        // 7. Copy Contact Number (Without showing it visually)
+        // 7. Copy Contact Number
         function copyContactNumber() {
             const numberToCopy = "01730984088";
             const btnIcon = document.getElementById('copyBtnIcon');
