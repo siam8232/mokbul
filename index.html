@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Md. Mokbul Hossain | Assistant Teacher (ICT)</title>
-    <meta name="description" content="Md. Mokbul Hossain - Assistant Teacher (ICT) at BKD Madrasha, Kaunia, Rangpur. Master Trainer (Digital Technology) & Creator of Education & Exam platform.">
+    <meta name="description" content="Md. Mokbul Hossain - Assistant Teacher (ICT) at BKD Madrasha, Kaunia, Rangpur. Master Trainer (Digital Technology).">
     <meta name="theme-color" content="#020617">
     
     <!-- Open Graph Meta Tags -->
@@ -23,29 +23,30 @@
 
     <style>
         /* ==========================================================================
-           Professional & Premium Dark Theme (ICT/Education Oriented)
+           CSS Variables & Themes (Dark Mode Default)
            ========================================================================== */
         :root {
-            /* Backgrounds */
-            --bg-main: #020617;       /* Very Dark Slate */
+            /* Backgrounds (Dark) */
+            --bg-main: #020617;
             --bg-nav: rgba(2, 6, 23, 0.85);
             --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-footer: #000000;
             
-            /* Text Colors */
+            /* Text Colors (Dark) */
             --text-light: #f8fafc;
             --text-muted: #94a3b8;
+            --heading-color: #ffffff;
             
-            /* Theme Gradients (Cyan/Blue for ICT Professional feel) */
+            /* Brand / Theme Colors */
             --primary-color: #38bdf8;
             --grad-primary: linear-gradient(135deg, #0ea5e9, #38bdf8);
-            --grad-accent: linear-gradient(135deg, #3b82f6, #8b5cf6);
             
             /* Social Brand Colors */
             --color-fb: #1877f2;
             --color-yt: #ff0000;
             --color-wa: #25d366;
-            --color-ph: #f59e0b; /* Professional Amber/Orange */
-            --color-email: #06b6d4; /* Cyan */
+            --color-ph: #f59e0b; 
+            --color-email: #06b6d4; 
             
             /* Glassmorphism */
             --glass-border: rgba(255, 255, 255, 0.08);
@@ -53,6 +54,22 @@
             --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
             
             --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Light Mode Variables */
+        body.light-mode {
+            --bg-main: #f8fafc;
+            --bg-nav: rgba(255, 255, 255, 0.9);
+            --bg-card: #ffffff;
+            --bg-footer: #f1f5f9;
+            
+            --text-light: #0f172a;
+            --text-muted: #475569;
+            --heading-color: #0f172a;
+            
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --glass-hover: rgba(0, 0, 0, 0.02);
+            --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
         * {
@@ -68,47 +85,38 @@
             overflow-x: hidden;
             scroll-behavior: smooth;
             line-height: 1.6;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
-        /* ==========================================================================
-           Scroll Progress Bar
-           ========================================================================== */
+        /* Scroll Progress Bar */
         .scroll-progress-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 3px;
             background: transparent; z-index: 999999;
         }
         .scroll-progress-bar {
-            height: 100%; width: 0%;
-            background: var(--grad-primary);
+            height: 100%; width: 0%; background: var(--grad-primary);
             box-shadow: 0 0 10px var(--primary-color);
         }
 
-        /* ==========================================================================
-           Background Animation (Tech/Professional Orbs)
-           ========================================================================== */
+        /* Background Orbs Animation */
         .animated-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -2; overflow: hidden; background: var(--bg-main);
+            z-index: -2; overflow: hidden; background: transparent;
         }
         .orb {
             position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15;
             animation: floatOrb 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
         }
+        body.light-mode .orb { opacity: 0.08; } /* Lighter orbs for light mode */
+        
         .orb-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #0ea5e9; }
         .orb-2 { bottom: -10%; right: -10%; width: 40vw; height: 40vw; background: #8b5cf6; animation-delay: -5s; }
-        .orb-3 { top: 40%; left: 30%; width: 30vw; height: 30vw; background: #38bdf8; opacity: 0.1; animation-delay: -10s; }
-
-        @keyframes floatOrb {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(80px, -80px) scale(1.1); }
-        }
-        
         .grid-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-image: radial-gradient(var(--glass-border) 1px, transparent 1px);
             background-size: 40px 40px; z-index: -1;
         }
 
@@ -119,19 +127,30 @@
             position: fixed; top: 0; left: 0; width: 100%;
             background: var(--bg-nav); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--glass-border);
-            z-index: 10000; padding: 15px 0;
-            transition: var(--transition);
+            z-index: 10000; padding: 15px 0; transition: var(--transition);
         }
         .nav-container {
             max-width: 1200px; margin: 0 auto; padding: 0 25px;
             display: flex; justify-content: space-between; align-items: center;
         }
         .nav-brand {
-            font-size: 1.5rem; font-weight: 700; color: #fff;
-            letter-spacing: 0.5px;
+            font-size: 1.5rem; font-weight: 700;
             background: var(--grad-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .nav-menu { display: flex; gap: 30px; }
+        
+        .nav-actions { display: flex; align-items: center; gap: 20px; }
+        
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: var(--bg-card); border: 1px solid var(--glass-border);
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-light); font-size: 1.1rem; cursor: pointer;
+            transition: var(--transition); outline: none;
+        }
+        .theme-toggle:hover { background: var(--primary-color); color: #fff; transform: rotate(15deg); }
+
+        .nav-menu { display: flex; gap: 30px; align-items: center; }
         .nav-menu li a {
             font-size: 1rem; font-weight: 500; color: var(--text-light);
             transition: var(--transition); position: relative;
@@ -149,11 +168,12 @@
             transition: var(--transition); border-radius: 2px;
         }
 
+        /* Mobile Menu */
         @media (max-width: 768px) {
             .hamburger { display: flex; }
             .nav-menu {
                 position: absolute; top: 100%; left: 0; width: 100%;
-                background: rgba(2, 6, 23, 0.95); backdrop-filter: blur(15px);
+                background: var(--bg-nav); backdrop-filter: blur(15px);
                 flex-direction: column; align-items: center; gap: 20px;
                 padding: 20px 0; border-bottom: 1px solid var(--glass-border);
                 clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
@@ -166,19 +186,18 @@
            Layout & Typography
            ========================================================================== */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
-        section { padding: 120px 0; position: relative; z-index: 1; }
+        section { padding: 100px 0; position: relative; z-index: 1; }
         
-        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header { text-align: center; margin-bottom: 50px; }
         .section-title {
-            font-size: 2.5rem; font-weight: 700;
-            background: var(--text-light); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-size: 2.5rem; font-weight: 700; color: var(--heading-color);
             margin-bottom: 15px; display: inline-block; position: relative;
         }
         .section-title::after {
             content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
             width: 60px; height: 3px; background: var(--grad-primary); border-radius: 2px;
         }
-        .section-subtitle { font-size: 1.15rem; color: var(--text-muted); font-weight: 400; margin-top: 20px; }
+        .section-subtitle { font-size: 1.1rem; color: var(--text-muted); font-weight: 400; margin-top: 20px; }
 
         /* ==========================================================================
            Hero Section
@@ -190,27 +209,27 @@
         }
         
         .profile-wrapper {
-            position: relative; width: 200px; height: 200px; margin-bottom: 30px;
-            border-radius: 50%; padding: 5px;
+            position: relative; width: 220px; height: 220px; margin-bottom: 30px;
+            border-radius: 50%; padding: 6px;
             background: var(--grad-primary);
             box-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
-            transition: var(--transition);
+            transition: var(--transition); margin-inline: auto;
         }
-        .profile-wrapper:hover {
-            transform: scale(1.03) translateY(-5px);
-            box-shadow: 0 15px 40px rgba(56, 189, 248, 0.5);
-        }
+        .profile-wrapper:hover { transform: scale(1.05) translateY(-5px); box-shadow: 0 15px 40px rgba(56, 189, 248, 0.5); }
         .profile-img-container {
             width: 100%; height: 100%; background: var(--bg-main);
-            border-radius: 50%; overflow: hidden; padding: 5px;
+            border-radius: 50%; overflow: hidden; padding: 4px;
         }
+        /* Zoom Profile Picture */
         .profile-img-container img {
             width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+            transform: scale(1.15); /* Zoomed in to hide cropped edges */
+            object-position: center top;
         }
 
         .hero h1 {
-            font-size: 3.5rem; font-weight: 700; margin-bottom: 10px;
-            color: #fff; letter-spacing: -0.5px;
+            font-size: 3.2rem; font-weight: 700; margin-bottom: 10px;
+            color: var(--heading-color); letter-spacing: -0.5px;
         }
         
         .hero-location {
@@ -220,7 +239,7 @@
         .hero-location i { color: var(--primary-color); }
 
         .typing-container {
-            font-size: 1.5rem; font-weight: 500; height: 40px;
+            font-size: 1.4rem; font-weight: 500; height: 40px;
             color: var(--primary-color);
         }
         .cursor { 
@@ -229,47 +248,29 @@
         }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        /* Scroll Down Indicator */
-        .scroll-down {
-            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-            display: flex; flex-direction: column; align-items: center; gap: 10px;
-            opacity: 0.7; transition: var(--transition); cursor: pointer;
-            animation: bounce 2s infinite;
-        }
-        .scroll-down:hover { opacity: 1; color: var(--primary-color); }
-        .scroll-down i { font-size: 1.5rem; }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-            40% { transform: translateY(-10px) translateX(-50%); }
-            60% { transform: translateY(-5px) translateX(-50%); }
-        }
-
         /* ==========================================================================
            About Section
            ========================================================================== */
         .about-content {
-            background: var(--bg-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            background: var(--bg-card); backdrop-filter: blur(16px);
             border: 1px solid var(--glass-border); border-radius: 20px;
             padding: 50px; text-align: center; box-shadow: var(--glass-shadow);
-            max-width: 900px; margin: 0 auto;
+            max-width: 900px; margin: 0 auto; transition: var(--transition);
         }
-        .about-content p {
-            font-size: 1.2rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 20px;
-        }
+        .about-content p { font-size: 1.15rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 20px; }
         .about-content p:last-child { margin-bottom: 0; }
         .highlight { color: var(--primary-color); font-weight: 600; }
+        body.light-mode .about-content p { color: #334155; }
 
         /* ==========================================================================
-           Professional Profile / Highlights
+           Professional Profile Section
            ========================================================================== */
-        .profile-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
-        }
+        .profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         .glass-card {
             background: var(--bg-card); backdrop-filter: blur(16px);
             border: 1px solid var(--glass-border); border-radius: 20px;
             padding: 40px 30px; text-align: center; transition: var(--transition);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; overflow: hidden;
+            box-shadow: var(--glass-shadow); position: relative; overflow: hidden;
         }
         .glass-card::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -277,8 +278,8 @@
             opacity: 0; transition: var(--transition); z-index: -1;
         }
         .glass-card:hover {
-            transform: translateY(-10px); border-color: rgba(56, 189, 248, 0.3);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4); background: var(--glass-hover);
+            transform: translateY(-10px); border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); background: var(--glass-hover);
         }
         .glass-card:hover::before { opacity: 1; }
         
@@ -288,116 +289,83 @@
             transition: var(--transition); display: inline-block;
         }
         .glass-card:hover .card-icon { transform: scale(1.1) rotate(5deg); }
-        .glass-card h3 { font-size: 1.3rem; color: #fff; font-weight: 600; }
+        .glass-card h3 { font-size: 1.3rem; color: var(--heading-color); font-weight: 600; }
+        .glass-card p { color: var(--text-muted); font-size: 0.95rem; margin-top: 5px; }
 
         /* ==========================================================================
            Education & Exam Section
            ========================================================================== */
         .edu-exam-wrapper {
-            background: linear-gradient(135deg, rgba(2, 6, 23, 0.9), rgba(15, 23, 42, 0.9));
-            border: 1px solid var(--glass-border); border-radius: 24px;
-            padding: 60px 40px; text-align: center; position: relative; overflow: hidden;
-            box-shadow: var(--glass-shadow);
+            background: linear-gradient(135deg, #0ea5e9, #2563eb); /* Premium Solid Gradient */
+            border-radius: 24px; padding: 60px 40px; text-align: center; 
+            position: relative; overflow: hidden; box-shadow: 0 15px 40px rgba(37, 99, 235, 0.3);
+            color: #fff;
         }
         .edu-exam-wrapper::after {
             content: '\f19c'; font-family: "Font Awesome 6 Free"; font-weight: 900;
             position: absolute; right: -20px; bottom: -20px; font-size: 15rem;
-            color: rgba(255,255,255,0.02); z-index: 0; transform: rotate(-15deg);
+            color: rgba(255,255,255,0.1); z-index: 0; transform: rotate(-15deg);
         }
         .edu-exam-content { position: relative; z-index: 1; }
         
         .edu-badge {
-            display: inline-block; padding: 8px 20px; background: rgba(255, 0, 0, 0.1);
-            color: var(--color-yt); border: 1px solid rgba(255, 0, 0, 0.2);
+            display: inline-block; padding: 8px 20px; background: rgba(255, 255, 255, 0.2);
+            color: #fff; border: 1px solid rgba(255, 255, 255, 0.3); backdrop-filter: blur(5px);
             border-radius: 50px; font-weight: 600; margin-bottom: 25px; font-size: 0.9rem;
         }
         .edu-exam-wrapper h3 { font-size: 2.2rem; margin-bottom: 20px; color: #fff; }
-        .edu-exam-wrapper p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 35px; max-width: 700px; margin-inline: auto; }
+        .edu-exam-wrapper p { font-size: 1.1rem; color: rgba(255,255,255,0.9); margin-bottom: 35px; max-width: 700px; margin-inline: auto; }
         
         .btn-yt-main {
             display: inline-flex; align-items: center; justify-content: center; gap: 12px;
-            background: var(--color-yt); color: #fff; font-size: 1.1rem; font-weight: 600;
+            background: #fff; color: #2563eb; font-size: 1.1rem; font-weight: 700;
             padding: 16px 35px; border-radius: 50px; transition: var(--transition);
-            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.3); border: none; outline: none; cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); border: none; cursor: pointer;
         }
-        .btn-yt-main:hover {
-            transform: translateY(-5px); box-shadow: 0 15px 35px rgba(255, 0, 0, 0.5);
-            background: #e60000;
-        }
+        .btn-yt-main:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3); background: #f8fafc; }
 
         /* ==========================================================================
-           Contact Section
+           Contact Buttons Section (Privacy focused)
            ========================================================================== */
         .contact-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;
+            max-width: 1000px; margin: 0 auto;
         }
         
         .contact-btn {
-            display: flex; align-items: center; justify-content: flex-start; gap: 20px;
+            display: flex; align-items: center; justify-content: center; gap: 15px;
             background: var(--bg-card); border: 1px solid var(--glass-border);
-            padding: 20px 25px; border-radius: 16px; font-size: 1.15rem; font-weight: 600;
-            transition: var(--transition); position: relative; overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 20px 25px; border-radius: 16px; font-size: 1.2rem; font-weight: 600;
+            transition: var(--transition); color: var(--text-light); text-align: center;
+            box-shadow: var(--glass-shadow); cursor: pointer; overflow: hidden; position: relative;
         }
+        .contact-btn i { font-size: 1.5rem; transition: var(--transition); }
         
-        .icon-box {
-            width: 50px; height: 50px; border-radius: 12px;
-            display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
-            transition: var(--transition);
+        /* Individual Button Colors & Hover */
+        .contact-btn.ph { background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.3); color: var(--color-ph); }
+        .contact-btn.ph:hover { background: var(--color-ph); color: #fff; transform: translateY(-5px); box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4); }
+
+        .contact-btn.wa { background: rgba(37, 211, 102, 0.05); border-color: rgba(37, 211, 102, 0.3); color: var(--color-wa); }
+        .contact-btn.wa:hover { background: var(--color-wa); color: #fff; transform: translateY(-5px); box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4); }
+
+        .contact-btn.fb { background: rgba(24, 119, 242, 0.05); border-color: rgba(24, 119, 242, 0.3); color: var(--color-fb); }
+        .contact-btn.fb:hover { background: var(--color-fb); color: #fff; transform: translateY(-5px); box-shadow: 0 10px 25px rgba(24, 119, 242, 0.4); }
+
+        .contact-btn.yt { background: rgba(255, 0, 0, 0.05); border-color: rgba(255, 0, 0, 0.3); color: var(--color-yt); }
+        .contact-btn.yt:hover { background: var(--color-yt); color: #fff; transform: translateY(-5px); box-shadow: 0 10px 25px rgba(255, 0, 0, 0.4); }
+
+        .contact-btn.em { background: rgba(6, 182, 212, 0.05); border-color: rgba(6, 182, 212, 0.3); color: var(--color-email); }
+        .contact-btn.em:hover { background: var(--color-email); color: #fff; transform: translateY(-5px); box-shadow: 0 10px 25px rgba(6, 182, 212, 0.4); }
+
+        .contact-btn.copy-btn {
+            background: transparent; border: 1px dashed var(--text-muted); color: var(--text-muted);
         }
+        .contact-btn.copy-btn:hover { background: var(--text-muted); color: #fff; border-style: solid; transform: translateY(-5px); }
 
-        /* Brand Styles */
-        .contact-btn.ph { color: var(--text-light); }
-        .contact-btn.ph .icon-box { background: rgba(245, 158, 11, 0.1); color: var(--color-ph); }
-        .contact-btn.ph:hover { border-color: var(--color-ph); background: rgba(245, 158, 11, 0.05); transform: translateY(-5px); }
-        .contact-btn.ph:hover .icon-box { background: var(--color-ph); color: #fff; box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4); }
-
-        .contact-btn.wa { color: var(--text-light); }
-        .contact-btn.wa .icon-box { background: rgba(37, 211, 102, 0.1); color: var(--color-wa); }
-        .contact-btn.wa:hover { border-color: var(--color-wa); background: rgba(37, 211, 102, 0.05); transform: translateY(-5px); }
-        .contact-btn.wa:hover .icon-box { background: var(--color-wa); color: #fff; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4); }
-
-        .contact-btn.fb { color: var(--text-light); }
-        .contact-btn.fb .icon-box { background: rgba(24, 119, 242, 0.1); color: var(--color-fb); }
-        .contact-btn.fb:hover { border-color: var(--color-fb); background: rgba(24, 119, 242, 0.05); transform: translateY(-5px); }
-        .contact-btn.fb:hover .icon-box { background: var(--color-fb); color: #fff; box-shadow: 0 5px 15px rgba(24, 119, 242, 0.4); }
-
-        .contact-btn.yt { color: var(--text-light); }
-        .contact-btn.yt .icon-box { background: rgba(255, 0, 0, 0.1); color: var(--color-yt); }
-        .contact-btn.yt:hover { border-color: var(--color-yt); background: rgba(255, 0, 0, 0.05); transform: translateY(-5px); }
-        .contact-btn.yt:hover .icon-box { background: var(--color-yt); color: #fff; box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4); }
-
-        .contact-btn.em { color: var(--text-light); }
-        .contact-btn.em .icon-box { background: rgba(6, 182, 212, 0.1); color: var(--color-email); }
-        .contact-btn.em:hover { border-color: var(--color-email); background: rgba(6, 182, 212, 0.05); transform: translateY(-5px); }
-        .contact-btn.em:hover .icon-box { background: var(--color-email); color: #fff; box-shadow: 0 5px 15px rgba(6, 182, 212, 0.4); }
-
-        .contact-info-text { display: flex; flex-direction: column; text-align: left; }
-        .contact-info-text span:first-child { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
-        .contact-info-text span:last-child { font-size: 1.1rem; }
-
-        /* Copy Phone Box */
-        .copy-phone-wrapper {
-            grid-column: 1 / -1; 
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(245, 158, 11, 0.1));
-            border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 16px;
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 30px; transition: var(--transition);
-        }
-        .copy-phone-wrapper:hover {
-            border-color: rgba(245, 158, 11, 0.5); box-shadow: 0 10px 30px rgba(245, 158, 11, 0.15);
-        }
-        .copy-phone-left { display: flex; align-items: center; gap: 15px; font-size: 1.2rem; }
-        .copy-phone-left i { color: var(--color-ph); font-size: 1.5rem; }
-        .copy-btn-action {
-            background: rgba(0,0,0,0.5); color: #fff; border: 1px solid rgba(255,255,255,0.1);
-            padding: 10px 20px; border-radius: 10px; cursor: pointer; transition: var(--transition);
-            display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 1rem;
-        }
-        .copy-btn-action:hover { background: #fff; color: #000; transform: scale(1.05); }
+        .contact-btn:hover i { transform: scale(1.2); }
 
         /* ==========================================================================
-           Animations & UI Components
+           Animations & Reveals
            ========================================================================== */
         .reveal {
             opacity: 0; transform: translateY(40px);
@@ -405,7 +373,7 @@
         }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Premium Toast Popup */
+        /* Toast Popup */
         .toast-container {
             position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
             background: rgba(15, 23, 42, 0.95); color: #fff;
@@ -416,76 +384,72 @@
             backdrop-filter: blur(10px); opacity: 0; pointer-events: none;
         }
         .toast-container.show { transform: translateX(-50%) translateY(0); opacity: 1; pointer-events: auto; }
-        .toast-container.error { border-left-color: #ef4444; }
-        .toast-container.success { border-left-color: #10b981; }
-        .toast-icon { font-size: 1.2rem; }
-        .toast-icon.error { color: #ef4444; }
-        .toast-icon.success { color: #10b981; }
+        .toast-icon { font-size: 1.2rem; color: #10b981; }
 
         /* ==========================================================================
            Footer
            ========================================================================== */
         footer { 
-            text-align: center; padding: 60px 20px 40px; 
-            background: #020617; border-top: 1px solid rgba(255,255,255,0.05);
-            position: relative; z-index: 1;
+            text-align: center; padding: 50px 20px 30px; 
+            background: var(--bg-footer); border-top: 1px solid var(--glass-border);
+            position: relative; z-index: 1; transition: var(--transition);
         }
-        .footer-brand {
-            font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 5px;
-        }
-        .footer-details {
-            color: var(--text-muted); font-size: 1rem; margin-bottom: 20px;
-        }
-        .footer-socials { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
-        .footer-socials a {
-            width: 40px; height: 40px; border-radius: 50%; background: var(--bg-card);
-            display: flex; align-items: center; justify-content: center;
-            border: 1px solid var(--glass-border); transition: var(--transition);
-        }
-        .footer-socials a:hover { background: var(--primary-color); color: #fff; transform: translateY(-3px); }
+        .footer-brand { font-size: 1.5rem; font-weight: 700; color: var(--heading-color); margin-bottom: 5px; }
+        .footer-details { color: var(--text-muted); font-size: 1rem; margin-bottom: 20px; line-height: 1.5; }
         .copyright {
-            font-size: 0.9rem; color: #64748b; border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 20px; display: inline-block; width: 100%; max-width: 500px;
+            font-size: 0.9rem; color: var(--text-muted); border-top: 1px solid var(--glass-border);
+            padding-top: 20px; display: inline-block; width: 100%; max-width: 400px; margin: 0 auto;
         }
 
         /* ==========================================================================
-           Responsive Adjustments
+           Responsive Adjustments (Mobile & Tablet)
            ========================================================================== */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .typing-container { font-size: 1.2rem; height: 50px; }
-            .profile-wrapper { width: 160px; height: 160px; }
+            section { padding: 70px 0; }
+            .hero { padding-top: 80px; }
+            .hero h1 { font-size: 2.3rem; }
+            .typing-container { font-size: 1.1rem; height: 35px; }
+            .profile-wrapper { width: 170px; height: 170px; }
             .section-title { font-size: 2rem; }
-            section { padding: 80px 0; }
             .about-content { padding: 30px 20px; }
-            .copy-phone-wrapper { flex-direction: column; gap: 15px; text-align: center; }
-            .edu-exam-wrapper { padding: 40px 20px; }
+            .about-content p { font-size: 1.05rem; }
+            .edu-exam-wrapper { padding: 40px 25px; }
             .edu-exam-wrapper h3 { font-size: 1.8rem; }
+            .contact-grid { grid-template-columns: 1fr; } /* Stack on mobile */
+            .contact-btn { padding: 16px; font-size: 1.1rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Scroll Progress Bar -->
+    <!-- Scroll Progress -->
     <div class="scroll-progress-container">
         <div class="scroll-progress-bar" id="progressBar"></div>
     </div>
 
-    <!-- Animated Background Elements -->
+    <!-- Animated Background -->
     <div class="animated-bg">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
         <div class="grid-overlay"></div>
     </div>
 
-    <!-- Navigation Bar -->
+    <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#home" class="nav-brand">Md. Mokbul Hossain</a>
-            <div class="hamburger" id="hamburger">
-                <span></span><span></span><span></span>
+            <a href="#home" class="nav-brand">M. Hossain</a>
+            
+            <div class="nav-actions">
+                <!-- Dark/Light Theme Toggle -->
+                <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+                
+                <div class="hamburger" id="hamburger">
+                    <span></span><span></span><span></span>
+                </div>
             </div>
+
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -498,14 +462,14 @@
 
     <!-- Toast Notification -->
     <div class="toast-container" id="toast">
-        <i class="fas fa-info-circle toast-icon" id="toastIcon"></i>
-        <span id="toastMsg">Message</span>
+        <i class="fas fa-check-circle toast-icon" id="toastIcon"></i>
+        <span id="toastMsg">Success</span>
     </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container reveal">
-            <div class="profile-wrapper mx-auto">
+            <div class="profile-wrapper">
                 <div class="profile-img-container">
                     <img src="https://i.ibb.co.com/pjh6QKLK/image.png" alt="Md. Mokbul Hossain">
                 </div>
@@ -518,10 +482,6 @@
                 <span id="typed-text"></span><span class="cursor"></span>
             </div>
         </div>
-        
-        <a href="#about" class="scroll-down">
-            <i class="fas fa-chevron-down"></i>
-        </a>
     </section>
 
     <!-- About Section -->
@@ -533,7 +493,6 @@
             </div>
             <div class="about-content">
                 <p>আমি <span class="highlight">Md. Mokbul Hossain</span>, বর্তমানে BKD Madrasha, Kaunia, Rangpur-এ <span class="highlight">Assistant Teacher (ICT)</span> হিসেবে দায়িত্ব পালন করছি। পাশাপাশি আমি <span class="highlight">Master Trainer (Digital Technology)</span> হিসেবেও কাজ করছি।</p>
-                
                 <p>শিক্ষার্থীদের আধুনিক তথ্যপ্রযুক্তির সাথে যুক্ত করতে এবং তাদের দক্ষতা বৃদ্ধিতে আমি কাজ করে যাচ্ছি। আমার পরিচালিত প্ল্যাটফর্ম <span class="highlight">Education & Exam</span>-এর মাধ্যমে নিয়মিত শিক্ষামূলক Tutorial Video এবং শিক্ষা-সংক্রান্ত গুরুত্বপূর্ণ Update ও Notice শেয়ার করা হয়।</p>
             </div>
         </div>
@@ -544,7 +503,6 @@
         <div class="container">
             <div class="section-header reveal">
                 <h2 class="section-title">Professional Profile</h2>
-                <p class="section-subtitle">আমার পেশাগত পরিচিতি ও কাজসমূহ</p>
             </div>
             <div class="profile-grid">
                 <div class="glass-card reveal">
@@ -554,12 +512,12 @@
                 <div class="glass-card reveal" style="transition-delay: 0.1s;">
                     <i class="fas fa-chalkboard-teacher card-icon"></i>
                     <h3>Master Trainer</h3>
-                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">Digital Technology</p>
+                    <p>Digital Technology</p>
                 </div>
                 <div class="glass-card reveal" style="transition-delay: 0.2s;">
                     <i class="fas fa-university card-icon"></i>
                     <h3>Education & Exam</h3>
-                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">Content Platform</p>
+                    <p>Educational Platform</p>
                 </div>
                 <div class="glass-card reveal">
                     <i class="fas fa-video card-icon"></i>
@@ -573,14 +531,14 @@
         </div>
     </section>
 
-    <!-- Education & Exam Section -->
+    <!-- Education Section -->
     <section id="education">
         <div class="container reveal">
             <div class="edu-exam-wrapper">
                 <div class="edu-exam-content">
                     <div class="edu-badge"><i class="fas fa-play-circle"></i> Official Channel</div>
                     <h3>Education & Exam</h3>
-                    <p>এটি একটি শিক্ষামূলক প্ল্যাটফর্ম/চ্যানেল, যেখানে শিক্ষামূলক Tutorial Video এবং শিক্ষা-সংক্রান্ত গুরুত্বপূর্ণ Update/Notice নিয়মিত শেয়ার করা হয়। আমাদের সাথে যুক্ত থেকে সবশেষ তথ্যগুলো জেনে নিন।</p>
+                    <p>এটি একটি শিক্ষামূলক প্ল্যাটফর্ম, যেখানে শিক্ষামূলক Tutorial Video এবং শিক্ষা-সংক্রান্ত গুরুত্বপূর্ণ Update/Notice নিয়মিত শেয়ার করা হয়। আমাদের সাথে যুক্ত থাকুন।</p>
                     
                     <a href="https://youtube.com/@educationexam1209?si=qLSEvtyOEi9ITE46" target="_blank" rel="noopener noreferrer" class="btn-yt-main safe-link">
                         <i class="fab fa-youtube"></i> Visit Channel
@@ -594,65 +552,36 @@
     <section id="contact">
         <div class="container">
             <div class="section-header reveal">
-                <h2 class="section-title">Contact Options</h2>
-                <p class="section-subtitle">যেকোনো প্রয়োজনে সরাসরি যোগাযোগ করুন</p>
+                <h2 class="section-title">Contact Me</h2>
+                <p class="section-subtitle">নিচের মাধ্যমগুলো ব্যবহার করে যোগাযোগ করুন</p>
             </div>
             <div class="contact-grid reveal">
-                <!-- Phone -->
+                
+                <!-- Privacy-focused Clean Buttons (No explicit numbers/URLs shown) -->
                 <a href="tel:+8801730984088" class="contact-btn ph safe-link">
-                    <div class="icon-box"><i class="fas fa-phone-alt"></i></div>
-                    <div class="contact-info-text">
-                        <span>Phone / Call</span>
-                        <span>01730984088</span>
-                    </div>
+                    <i class="fas fa-phone-alt"></i> Call Now
                 </a>
-
-                <!-- WhatsApp -->
+                
                 <a href="https://wa.me/8801730984088" target="_blank" rel="noopener noreferrer" class="contact-btn wa safe-link">
-                    <div class="icon-box"><i class="fab fa-whatsapp"></i></div>
-                    <div class="contact-info-text">
-                        <span>WhatsApp</span>
-                        <span>+8801730984088</span>
-                    </div>
+                    <i class="fab fa-whatsapp"></i> WhatsApp
                 </a>
 
-                <!-- Facebook -->
                 <a href="https://www.facebook.com/mokbul.hossain.794/" target="_blank" rel="noopener noreferrer" class="contact-btn fb safe-link">
-                    <div class="icon-box"><i class="fab fa-facebook-f"></i></div>
-                    <div class="contact-info-text">
-                        <span>Facebook Profile</span>
-                        <span>Md. Mokbul Hossain</span>
-                    </div>
+                    <i class="fab fa-facebook-f"></i> Facebook
                 </a>
 
-                <!-- YouTube -->
                 <a href="https://youtube.com/@educationexam1209?si=qLSEvtyOEi9ITE46" target="_blank" rel="noopener noreferrer" class="contact-btn yt safe-link">
-                    <div class="icon-box"><i class="fab fa-youtube"></i></div>
-                    <div class="contact-info-text">
-                        <span>YouTube Channel</span>
-                        <span>Education & Exam</span>
-                    </div>
+                    <i class="fab fa-youtube"></i> YouTube
                 </a>
 
-                <!-- Email -->
                 <a href="mailto:mhossain.ict99@gmail.com" class="contact-btn em safe-link">
-                    <div class="icon-box"><i class="fas fa-envelope"></i></div>
-                    <div class="contact-info-text">
-                        <span>Email Address</span>
-                        <span>mhossain.ict99@gmail.com</span>
-                    </div>
+                    <i class="fas fa-envelope"></i> Email
                 </a>
 
-                <!-- Copy Phone Wrapper -->
-                <div class="copy-phone-wrapper">
-                    <div class="copy-phone-left">
-                        <i class="fas fa-mobile-alt"></i>
-                        <span>Mobile: <strong>01730984088</strong></span>
-                    </div>
-                    <button class="copy-btn-action" onclick="copyPhoneNumber()">
-                        <i class="fas fa-copy" id="copyIconBtn"></i> Copy Number
-                    </button>
-                </div>
+                <!-- Copy Contact Number (Hidden text, secure copy) -->
+                <button class="contact-btn copy-btn" onclick="copyContactNumber()">
+                    <i class="fas fa-copy" id="copyBtnIcon"></i> Copy Phone Number
+                </button>
             </div>
         </div>
     </section>
@@ -663,14 +592,7 @@
             <h2 class="footer-brand">Education & Exam</h2>
             <div class="footer-details">
                 <strong>Md. Mokbul Hossain</strong><br>
-                Assistant Teacher (ICT)<br>
-                BKD Madrasha, Kaunia, Rangpur
-            </div>
-            <div class="footer-socials">
-                <a href="https://www.facebook.com/mokbul.hossain.794/" target="_blank" rel="noopener noreferrer" class="safe-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://youtube.com/@educationexam1209?si=qLSEvtyOEi9ITE46" target="_blank" rel="noopener noreferrer" class="safe-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="mailto:mhossain.ict99@gmail.com" class="safe-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                <a href="https://wa.me/8801730984088" target="_blank" rel="noopener noreferrer" class="safe-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                Assistant Teacher (ICT) | BKD Madrasha
             </div>
             <div class="copyright">
                 &copy; 2026 Md. Mokbul Hossain. All Rights Reserved.
@@ -680,176 +602,159 @@
 
     <!-- JavaScript -->
     <script>
-        // 1. Typing Effect Logic
+        // 1. Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+
+        // Check local storage for theme
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            if (body.classList.contains('light-mode')) {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // 2. Typing Effect
         const typingWords = [
             "Assistant Teacher (ICT)",
             "Master Trainer (Digital Technology)",
             "Education & Exam",
-            "শিক্ষামূলক ভিডিও ও তথ্যের জন্য যুক্ত থাকুন"
+            "শিক্ষামূলক ভিডিওর জন্য যুক্ত থাকুন"
         ];
-        let wordIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
+        let wordIdx = 0, charIdx = 0, isDeleting = false;
         
         function typeEffect() {
             const textElement = document.getElementById("typed-text");
             if(!textElement) return;
-            
-            const currentWord = typingWords[wordIndex];
+            const currentWord = typingWords[wordIdx];
             
             if (isDeleting) {
-                textElement.innerText = currentWord.substring(0, charIndex - 1);
-                charIndex--;
+                textElement.innerText = currentWord.substring(0, charIdx - 1);
+                charIdx--;
             } else {
-                textElement.innerText = currentWord.substring(0, charIndex + 1);
-                charIndex++;
+                textElement.innerText = currentWord.substring(0, charIdx + 1);
+                charIdx++;
             }
             
-            let typingSpeed = isDeleting ? 40 : 80;
+            let speed = isDeleting ? 40 : 80;
             
-            if (!isDeleting && charIndex === currentWord.length) {
-                typingSpeed = 2000; // Pause at end of word
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                wordIndex = (wordIndex + 1) % typingWords.length;
-                typingSpeed = 500; // Pause before typing next word
+            if (!isDeleting && charIdx === currentWord.length) {
+                speed = 2000; isDeleting = true;
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false; wordIdx = (wordIdx + 1) % typingWords.length; speed = 500;
             }
-            
-            setTimeout(typeEffect, typingSpeed);
+            setTimeout(typeEffect, speed);
         }
 
-        // 2. Scroll Progress & Sticky Navbar
+        // 3. Scroll & Navbar Logic
         function handleScroll() {
-            // Scroll Progress
             const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById("progressBar").style.width = scrolled + "%";
+            document.getElementById("progressBar").style.width = (winScroll / height) * 100 + "%";
 
-            // Navbar styling on scroll
             const navbar = document.getElementById("navbar");
             if (winScroll > 50) {
                 navbar.style.padding = "10px 0";
-                navbar.style.background = "rgba(2, 6, 23, 0.95)";
-                navbar.style.boxShadow = "0 4px 20px rgba(0,0,0,0.5)";
+                navbar.style.boxShadow = "var(--glass-shadow)";
             } else {
                 navbar.style.padding = "15px 0";
-                navbar.style.background = "rgba(2, 6, 23, 0.85)";
                 navbar.style.boxShadow = "none";
             }
         }
 
-        // 3. Scroll Reveal Animation using IntersectionObserver (Clean & Modern)
-        function initScrollReveal() {
+        // 4. Intersection Observer for Scroll Reveals
+        function initReveals() {
             const reveals = document.querySelectorAll('.reveal');
-            const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
-            
-            const revealObserver = new IntersectionObserver((entries, observer) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        observer.unobserve(entry.target); // Optional: reveals only once
+                        observer.unobserve(entry.target);
                     }
                 });
-            }, revealOptions);
-
-            reveals.forEach(reveal => revealObserver.observe(reveal));
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+            reveals.forEach(r => observer.observe(r));
         }
 
-        // 4. Mobile Hamburger Menu
+        // 5. Mobile Menu Toggle
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
-        
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-
-        // Close menu when clicking a link
+        hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
         document.querySelectorAll('.nav-menu li a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-            });
+            link.addEventListener('click', () => navMenu.classList.remove('active'));
         });
 
-        // 5. Custom Toast Notification Logic
-        let toastTimeout;
-        function showToast(message, type = 'success') {
+        // 6. Toast Notification
+        let toastTimer;
+        function showToast(message, isError = false) {
             const toast = document.getElementById('toast');
-            const toastMsg = document.getElementById('toastMsg');
-            const toastIcon = document.getElementById('toastIcon');
+            const icon = document.getElementById('toastIcon');
+            document.getElementById('toastMsg').innerText = message;
             
-            // Set message and styling
-            toastMsg.innerText = message;
-            
-            if (type === 'error') {
-                toast.classList.add('error');
-                toast.classList.remove('success');
-                toastIcon.className = 'fas fa-exclamation-circle toast-icon error';
+            if(isError) {
+                icon.className = 'fas fa-exclamation-circle toast-icon';
+                icon.style.color = '#ef4444';
+                toast.style.borderLeftColor = '#ef4444';
             } else {
-                toast.classList.add('success');
-                toast.classList.remove('error');
-                toastIcon.className = 'fas fa-check-circle toast-icon success';
+                icon.className = 'fas fa-check-circle toast-icon';
+                icon.style.color = '#10b981';
+                toast.style.borderLeftColor = '#10b981';
             }
             
-            // Show toast
             toast.classList.add('show');
-            
-            // Hide after 3 seconds
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        // 6. Copy Phone Number Logic
-        function copyPhoneNumber() {
-            const phoneNumber = "01730984088";
-            const icon = document.getElementById('copyIconBtn');
+        // 7. Copy Contact Number (Without showing it visually)
+        function copyContactNumber() {
+            const numberToCopy = "01730984088";
+            const btnIcon = document.getElementById('copyBtnIcon');
             
-            // Fallback for older browsers or if Clipboard API fails
             const tempInput = document.createElement("input");
-            tempInput.value = phoneNumber;
+            tempInput.value = numberToCopy;
             document.body.appendChild(tempInput);
             tempInput.select();
             
             try {
                 document.execCommand("copy");
-                showToast("মোবাইল নম্বর কপি হয়েছে!", "success");
-                icon.classList.replace("fa-copy", "fa-check");
-                setTimeout(() => icon.classList.replace("fa-check", "fa-copy"), 3000);
+                showToast("মোবাইল নম্বর কপি হয়েছে!");
+                btnIcon.classList.replace("fa-copy", "fa-check");
+                setTimeout(() => btnIcon.classList.replace("fa-check", "fa-copy"), 3000);
             } catch (err) {
-                showToast("নম্বর কপি করতে সমস্যা হয়েছে!", "error");
+                showToast("নম্বর কপি করতে সমস্যা হয়েছে!", true);
             }
-            
             document.body.removeChild(tempInput);
         }
 
-        // 7. Missing Contact Option Protection (Future Proofing)
+        // 8. Protect Empty Links (Future-proof)
         function initSafeLinks() {
-            const links = document.querySelectorAll('a.safe-link');
-            links.forEach(link => {
+            document.querySelectorAll('a.safe-link').forEach(link => {
                 link.addEventListener('click', function(e) {
                     const href = this.getAttribute('href');
-                    // Check if link is empty, just a hash, or specific empty triggers
-                    if (!href || href === '#' || href.trim() === '' || href.includes('YOUR_') || href === 'mailto:') {
+                    if (!href || href === '#' || href === 'mailto:') {
                         e.preventDefault();
-                        showToast("এই অপশনটি বর্তমানে যুক্ত করা হয়নি।", "error");
+                        showToast("দুঃখিত, এই অপশনটি বর্তমানে যুক্ত করা হয়নি।", true);
                     }
                 });
             });
         }
 
-        // Initialize Everything on Load
+        // Init
         window.addEventListener('DOMContentLoaded', () => {
-            typeEffect();
-            initScrollReveal();
-            initSafeLinks();
-            handleScroll(); // initial check
+            typeEffect(); initReveals(); initSafeLinks(); handleScroll();
         });
-        
         window.addEventListener('scroll', handleScroll);
-
     </script>
 </body>
 </html>
